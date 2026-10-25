@@ -36,13 +36,13 @@ public class TrainStop {
     private LocalDateTime updatedAt;
 
     @PrePersist
-    void onCreate() {
+    public void prePersist() {
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
     }
 
     @PreUpdate
-    void onUpdate() {
+    public void preUpdate() {
         updatedAt = LocalDateTime.now();
     }
 

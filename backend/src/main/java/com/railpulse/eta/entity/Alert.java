@@ -32,7 +32,7 @@ public class Alert {
     private boolean acknowledged = false;
 
     @PrePersist
-    void onCreate() {
+    public void prePersist() {
         createdAt = LocalDateTime.now();
     }
 

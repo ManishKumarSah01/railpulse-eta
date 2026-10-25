@@ -38,11 +38,14 @@ public class RunningUpdate {
     private LocalDateTime createdAt;
 
     @PrePersist
-    void onCreate() {
+    public void prePersist() {
         createdAt = LocalDateTime.now();
         if (receivedAt == null) {
             receivedAt = LocalDateTime.now();
         }
+    }
+
+    public RunningUpdate() {
     }
 
     public Long getId() { return id; }

@@ -29,7 +29,7 @@ public class ActualArrival {
     private LocalDateTime createdAt;
 
     @PrePersist
-    void onCreate() {
+    public void prePersist() {
         createdAt = LocalDateTime.now();
     }
 

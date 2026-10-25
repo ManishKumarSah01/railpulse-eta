@@ -2,7 +2,6 @@ package com.railpulse.eta.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Entity
 @Table(name = "stations")
@@ -28,13 +27,13 @@ public class Station {
     private LocalDateTime updatedAt;
 
     @PrePersist
-    void onCreate() {
+    public void prePersist() {
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
     }
 
     @PreUpdate
-    void onUpdate() {
+    public void preUpdate() {
         updatedAt = LocalDateTime.now();
     }
 

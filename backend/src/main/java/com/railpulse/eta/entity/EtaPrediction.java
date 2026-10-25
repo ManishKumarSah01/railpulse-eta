@@ -44,7 +44,7 @@ public class EtaPrediction {
     private LocalDateTime createdAt;
 
     @PrePersist
-    void onCreate() {
+    public void prePersist() {
         createdAt = LocalDateTime.now();
     }
 
