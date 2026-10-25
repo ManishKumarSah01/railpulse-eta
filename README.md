@@ -9,7 +9,7 @@ It combines a Java Spring Boot backend, a React + TypeScript dashboard, PostgreS
 - Search trains by number or name
 - View route schedules and next-station ETA
 - Baseline ETA predictions with uncertainty interval
-- Ml adapter for trained model and safe fallback to baseline
+- ML adapter with safe fallback to baseline
 - Dashboard for passengers and operations
 - Alert generation for delay, stale data, and significant ETA changes
 - Demo simulator with labelled simulated data
@@ -21,7 +21,7 @@ It combines a Java Spring Boot backend, a React + TypeScript dashboard, PostgreS
 - Backend: Java 21, Spring Boot 3.3.x, Spring Data JPA, Flyway, Maven
 - Frontend: React, TypeScript, Vite, Recharts, React Router
 - Database: PostgreSQL
-- ML: Python 3.11+, scikit-learn, pandas, NumPy, ONNX
+- ML: Python 3.11+, scikit-learn, pandas, NumPy, ONNX, ONNX Runtime
 - Monitoring: Spring Actuator, structured logging
 
 ## Quick start
@@ -40,8 +40,6 @@ Copy `.env.example` and fill values.
 
 ### 2. Start PostgreSQL
 
-Use Docker Compose:
-
 ```bash
 docker compose up -d postgres
 ```
@@ -54,7 +52,7 @@ mvn clean install
 mvn spring-boot:run
 ```
 
-The API will be available at:
+API URLs:
 
 - http://localhost:8080/api/health
 - http://localhost:8080/swagger-ui.html
@@ -88,16 +86,16 @@ python evaluation/evaluate_model.py
 railpulse-eta/
 ├── backend/
 │   ├── pom.xml
-│   ├── src/
-│   └── ...
+│   ├── Dockerfile
+│   └── src/
 ├── frontend/
 │   ├── package.json
+│   ├── Dockerfile
 │   └── src/
 ├── ml/
 │   ├── requirements.txt
 │   ├── training/
 │   ├── evaluation/
-│   ├── export/
 │   └── sample-data/
 ├── docker-compose.yml
 ├── .env.example
@@ -109,14 +107,8 @@ railpulse-eta/
 
 - This is an operational prototype using demo data unless a live feed is configured.
 - No production-grade railway authority data source is included.
-- ML model is optional and safely falls back to the baseline predictor.
+- ML model is optional and falls back to the baseline predictor.
 - The app is informational and does not control signaling or safety-critical systems.
-
-## Contribution notes
-
-- All timestamps are stored in UTC and displayed in local time when needed.
-- Simulated data is explicitly labelled in APIs and the UI.
-- Predictions never claim live railway truth if a demo or stale feed is used.
 
 ## License
 
